@@ -13,6 +13,7 @@ services:
     volumes:
       - mysql-db:/var/lib/mysql
   backend:
+    stdin_open: true
     tty: true
     depends_on:
       - db
@@ -23,13 +24,13 @@ services:
       - 3000:3000
     volumes:
       - ./backend:/app
-    command: "rails server -b 0.0.0.0"
+    command: bash -c "bundle install && rails server -b 0.0.0.0"
   frontend:
     build:
       context: ./infra/frontend/
       dockerfile: Dockerfile
     volumes:
-      - ./frontend/src:/usr/src/app
+      - ./frontend/app:/usr/src/app
     command: 'yarn dev'
     ports:
       - 8000:3000
