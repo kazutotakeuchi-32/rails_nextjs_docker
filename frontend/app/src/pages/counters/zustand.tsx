@@ -1,3 +1,4 @@
+import Layout from "@/components/layouts/user";
 import useBearStore from "@/stores/bearState";
 
 const MAX_COUNT = 10
@@ -16,7 +17,7 @@ const ZustandCounter = () => {
 
 
     return (
-        <div>
+        <Layout>
             <h1>Counter: {bears}</h1>
             <button onClick={incrementClick}>
                 +
@@ -24,7 +25,7 @@ const ZustandCounter = () => {
             <button onClick={decrementClick}>
                 -
             </button>
-        </div>
+        </Layout>
     )
 };
 
