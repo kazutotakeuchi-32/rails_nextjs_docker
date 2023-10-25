@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Button from '@/components/elements/button'
 import Layout from '@/components/layouts/user/index'
-import useBearStore from '@/stores/bearState'
+import useBearStore from '@/stores/zustand/bearSlice'
 
 export default function PostsIndex() {
   const bears = useBearStore((state) => state.bears)
@@ -10,7 +10,7 @@ export default function PostsIndex() {
     useBearStore(state => state.increment())
   }
 
-  
+
 
   return (
     <Layout>

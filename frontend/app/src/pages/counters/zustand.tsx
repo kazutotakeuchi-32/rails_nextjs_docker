@@ -1,11 +1,13 @@
 import Layout from "@/components/layouts/user";
-import useBearStore from "@/stores/bearState";
+
+import useStore  from "@/hooks/useStore";
 
 const MAX_COUNT = 10
 const MIN_COUNT = 0
 
 const ZustandCounter = () => {
-    const {bears, increment, decrement} =  useBearStore((state) => state)
+    const {bears, increment, decrement} = useStore().bearSlice()
+
     
     const incrementClick = () => {
         if (bears < MAX_COUNT) increment()

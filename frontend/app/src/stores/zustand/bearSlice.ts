@@ -8,7 +8,7 @@ interface BearState {
 
 }
 
-const useBearStore = create<BearState>()((set) => ({
+const BearSlice = create<BearState>()((set) => ({
     bears: 0,
     increment: () => set(state => ({bears: state.bears + 1})),
     decrement: () => set(state => ({bears: state.bears - 1})),
@@ -18,4 +18,4 @@ const useBearStore = create<BearState>()((set) => ({
 
 
 
-export default useBearStore;
+export default BearSlice;
