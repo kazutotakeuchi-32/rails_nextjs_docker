@@ -18,17 +18,17 @@ services:
     depends_on:
       - db
     build:
-      context: ./infra/backend/
-      dockerfile: Dockerfile
+      context: ./
+      dockerfile: ./infra/backend/Dockerfile
     ports:
       - 3000:3000
     volumes:
       - ./backend:/app
-    command: bash -c "bundle install && rails server -b 0.0.0.0"
+    command: bash -c "rails server -b 0.0.0.0"
   frontend:
     build:
-      context: ./infra/frontend/
-      dockerfile: Dockerfile
+      context: ./
+      dockerfile: ./infra/frontend/Dockerfile
     volumes:
       - ./frontend/app:/usr/src/app
     command: 'yarn dev'
