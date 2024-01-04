@@ -10,6 +10,8 @@ COPY ./backend/Gemfile.lock ${ROOT}
 
 COPY ./infra/backend/entrypoint.sh entrypoint.sh
 
+RUN chmod +x entrypoint.sh
+
 RUN gem install bundler
 RUN bundle install --jobs 4
 
