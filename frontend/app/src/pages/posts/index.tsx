@@ -1,13 +1,12 @@
-import Image from 'next/image'
-import Button from '@/components/elements/button'
 import Layout from '@/components/layouts/user/index'
 
-export default function Home() {
+export default function PostsIndex() {
+
   return (
     <Layout>
-        <div className="">
-            content
+        <div className="">  
         </div>
     </Layout>
   )
 }
+
