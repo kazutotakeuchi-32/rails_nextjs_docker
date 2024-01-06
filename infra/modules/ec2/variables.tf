@@ -19,3 +19,7 @@ variable "key_name" {
   default = "ec2_key"
 }
 
+
+variable "domain_name" {
+  default = "done-api.com"
+}

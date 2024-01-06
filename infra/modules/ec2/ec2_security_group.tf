@@ -4,13 +4,14 @@
   -----------------------------
   HTTP TCP  80 Ipv4 0.0.0.0/0
   SSH  TCP  22 Ipv4 0.0.0.0/0
+  icmp ALL ALL Ipv4
   -----------------------------
 
   アウトバウンドルール
   -----------------------------
   80: HTTP Ipv4 0.0.0.0./0
   443: HTTPS Ipv4 0.0.0.0/0
-  67: DHCP Ipv4 0.0.0/0
+  ICMP ALL ALL Ipv4
   -----------------------------
  */
 
@@ -31,8 +32,6 @@ resource "aws_security_group" "this" {
     ipv6_cidr_blocks = ["0::/0"]
   }
 
-
-
   ingress {
     description = "SSH"
     from_port   = 22
@@ -40,6 +39,15 @@ resource "aws_security_group" "this" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+   ingress {
+    description = "ICMP"
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
+    cidr_blocks = ["0.0.0.0/0"]
+   }
+
 
   egress {
     description = "HTTP"
@@ -58,15 +66,13 @@ resource "aws_security_group" "this" {
     ipv6_cidr_blocks = ["0::/0"]
   }
 
-  # DHCP
   egress {
-    description = "DHCP"
-    from_port   = 67
-    to_port     = 67
-    protocol    = "udp"
+    description = "ICMP"
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
 
 
 }
