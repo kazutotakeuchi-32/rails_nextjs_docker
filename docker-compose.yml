@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   db:
-    image: mysql:8.0
+    build:
+      context: ./
+      dockerfile: ./infra/db/Dockerfile
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     environment:
       MYSQL_ROOT_PASSWORD: password
@@ -12,28 +14,38 @@ services:
       - 3306:3306
     volumes:
       - mysql-db:/var/lib/mysql
-  backend:
+  api:
     stdin_open: true
     tty: true
     depends_on:
       - db
     build:
-      context: ./infra/backend/
-      dockerfile: Dockerfile
+      context: ./
+      dockerfile: ./infra/backend/Dockerfile
     ports:
       - 3000:3000
     volumes:
       - ./backend:/app
-    command: bash -c "bundle install && rails server -b 0.0.0.0"
-  frontend:
+    command: bash -c "rails server -b 0.0.0.0"
+  ap:
     build:
-      context: ./infra/frontend/
-      dockerfile: Dockerfile
+      context: ./
+      dockerfile: ./infra/frontend/Dockerfile
     volumes:
       - ./frontend/app:/usr/src/app
     command: 'yarn dev'
     ports:
-      - 8000:3000
+      - 8000:8000
+  web:
+    build:
+      context: ./
+      dockerfile: ./infra/web/Dockerfile
+    depends_on:
+      - api
+      - ap
+    ports:
+      - 80:80
+    
 volumes:
   mysql-db:
     driver: local
