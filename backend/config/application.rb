@@ -11,6 +11,13 @@ module App
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
+    # Load my own middleware
+    Dir[Rails.root.join('lib', 'middleware', '*.{rb}')].each { |file| require file }
+
+    # Add own middleware for catching errors
+    config.middleware.use Middleware::CatchRackErrors
+
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
