@@ -7,9 +7,10 @@ up:
 down: 
 	docker-compose down
 web: 
-	docker-compose exec frontend sh
+	docker-compose exec web sh
 api:
-	docker-compose exec backend bash
+	docker-compose exec api bash
+ap:
+	docker-compose exec ap sh
 db: 
 	docker-compose exec db bash
-
