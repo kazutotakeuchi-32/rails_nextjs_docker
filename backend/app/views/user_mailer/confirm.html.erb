@@ -1,0 +1,11 @@
+<p><%= @user.name %>,</p>
+
+<p>
+  ご登録ありがとうございます。<br />
+  以下のリンクをクリックして、アカウントを有効にしてください。<br />
+</p>
+
+<p>
+  <%= link_to 'Confirm', api_v1_auth_confirm_url(token:
+  @user.activation_digest)%>
+</p>
